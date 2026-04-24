@@ -47,6 +47,7 @@ USE_VAE_SILHOUETTE = 0  # Set by train.py at save time
 SILHOUETTE_SOFT_SIG = 2.0  # Set by train.py at save time
 ROUGH_MASK_SOFT = 0  # Set by train.py at save time
 ROUGH_MASK_SOFT_SIG = 3.0  # Set by train.py at save time
+USE_REPAIR_ATTN_MASK = 0  # Set by train.py at save time
 
 
 WRONG_POSE_MAP = {
@@ -87,13 +88,13 @@ def load_model(run_dir, device, config):
         set_peft_model_state_dict(t, load_file(tryon_path), adapter_name="tryon")
 
     # exp415: install custom attention processor if this run trained with mask mode
-    if ATTN_MASK_MODE:
+    if ATTN_MASK_MODE or USE_REPAIR_ATTN_MASK:
         n = 0
         for mod in t.modules():
             if hasattr(mod, "processor") and isinstance(mod.processor, QwenDoubleStreamAttnProcessor2_0):
                 mod.processor = CoreRingAttnProcessor()
                 n += 1
-        print(f"CoreRingAttnProcessor installed on {n} blocks (mode={ATTN_MASK_MODE})")
+        print(f"CoreRingAttnProcessor installed on {n} blocks (mode={ATTN_MASK_MODE}, repair_mask={USE_REPAIR_ATTN_MASK})")
 
     t.to(td).eval()
 
@@ -298,6 +299,35 @@ def predict_sample(model, batch, device, seed, settings):
     img_shapes_base = [(1, H//2, W//2)] * (1 + len(slot_order))
 
     cfg_scale = settings.get("cfg_scale", 1.0)
+
+    # Build attention mask once (depends on M and warped_mask, both static across steps)
+    if USE_REPAIR_ATTN_MASK:
+        # M is agnostic_mask_latent at latent res, shape (B, 1, H, W)
+        # wm is warped_mask_128 at latent res, also (B, 1, H, W)
+        wm_for_mask = batch.get("warped_mask")
+        if wm_for_mask is not None:
+            wm_for_mask = wm_for_mask.to(td, dtype=wd)
+            if wm_for_mask.dim() == 3: wm_for_mask = wm_for_mask.unsqueeze(1)
+            # agnostic slot index in seq: position 1 (right after C) for the standard SLOT_ORDER
+            agn_slot_pos = 1 if 0 in slot_order else 1
+            wm_bin = (wm_for_mask > 0.5).to(M.dtype)
+            repair_band = (M - wm_bin).clamp(0, 1)
+            keep_mask = (1.0 - M).clamp(0, 1)
+            repair_tok = _pack(repair_band.expand(B, C, H, W), B, C, H, W).mean(dim=-1)
+            keep_tok   = _pack(keep_mask.expand(B, C, H, W),   B, C, H, W).mean(dim=-1)
+            repair_pos = (repair_tok > 0.5)
+            keep_pos   = (keep_tok > 0.5)
+            txt_len = pe.shape[1]
+            img_tok = (H // 2) * (W // 2)
+            num_slots = 1 + len(slot_order)
+            total_seq = txt_len + num_slots * img_tok
+            inf_mask = torch.zeros(B, 1, total_seq, total_seq, device=td, dtype=wd)
+            for b in range(B):
+                q_idx = txt_len + torch.where(repair_pos[b])[0]
+                k_idx = txt_len + agn_slot_pos * img_tok + torch.where(keep_pos[b])[0]
+                if q_idx.numel() > 0 and k_idx.numel() > 0:
+                    inf_mask[b, 0, q_idx.unsqueeze(1), k_idx.unsqueeze(0)] = -1e4
+            _INFER_MASK_HOLDER["mask"] = inf_mask
 
     with torch.no_grad(), torch.amp.autocast("cuda", dtype=wd):
         for ts in sch.timesteps:

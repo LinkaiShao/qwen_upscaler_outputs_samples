@@ -171,6 +171,64 @@ NUM_SLOTS = len(SLOT_ORDER) + 1   # +1 for C position 0
 ATTN_MASK_HOLDER = {"mask": None}
 GARMENT_GATES = []   # filled by main() when USE_GARMENT_GATE=1
 
+# ── Custom attention processor that reads attention_mask from ATTN_MASK_HOLDER ──
+# Used when USE_REPAIR_ATTN_MASK=1 to block repair-band → out-of-mask attention.
+from diffusers.models.transformers.transformer_qwenimage import QwenDoubleStreamAttnProcessor2_0
+
+class HoleyAttnProcessor(QwenDoubleStreamAttnProcessor2_0):
+    """Same as parent but reads attention_mask from global holder when not provided."""
+    def __call__(self, attn, hidden_states, encoder_hidden_states=None,
+                 encoder_hidden_states_mask=None, attention_mask=None,
+                 image_rotary_emb=None):
+        if attention_mask is None:
+            attention_mask = ATTN_MASK_HOLDER.get("mask")
+        return super().__call__(attn, hidden_states, encoder_hidden_states,
+                                encoder_hidden_states_mask, attention_mask, image_rotary_emb)
+
+
+def build_repair_attn_mask(M_full_lat, warped_mask_lat, txt_seq_len, num_slots,
+                            B, device, dtype, agnostic_slot_idx_in_seq=1):
+    """
+    Build attention bias to block C-slot repair-band queries from attending to
+    agnostic-slot out-of-mask keys.
+
+    Args:
+      M_full_lat: (B, 1, H, W) binary edit-region mask at latent res
+      warped_mask_lat: (B, 1, H, W) warped garment mask (soft) at latent res
+      txt_seq_len: scalar — number of text tokens prepended to image tokens
+      num_slots: NUM_SLOTS (C + spatial slots)
+      agnostic_slot_idx_in_seq: 1-based position of agnostic in spatial slots
+                                 (0 = C, 1 = first spatial slot which is agnostic)
+
+    Returns: (B, 1, total_seq, total_seq) bias tensor with -inf at blocked Q,K pairs.
+    """
+    H, W = M_full_lat.shape[-2:]
+    img_tok_per_slot = (H // 2) * (W // 2)             # 3072 with 128x96 / 2x2 packing
+    total_img = num_slots * img_tok_per_slot
+    total_seq = txt_seq_len + total_img
+
+    # Repair band = M_full minus warped (binary)
+    wm_bin = (warped_mask_lat > 0.5).to(dtype=M_full_lat.dtype)
+    repair_band = (M_full_lat - wm_bin).clamp(0, 1)
+    keep_mask = (1.0 - M_full_lat).clamp(0, 1)
+
+    # Pack to token level (mean over channels for the broadcast)
+    repair_tok = pack_latents(repair_band.expand(B, 16, H, W), B, 16, H, W).mean(dim=-1)  # (B, 3072)
+    keep_tok   = pack_latents(keep_mask.expand(B, 16, H, W),   B, 16, H, W).mean(dim=-1)   # (B, 3072)
+
+    repair_pos = (repair_tok > 0.5)   # (B, 3072) bool
+    keep_pos   = (keep_tok   > 0.5)   # (B, 3072) bool
+
+    mask = torch.zeros(B, 1, total_seq, total_seq, device=device, dtype=dtype)
+    for b in range(B):
+        q_idx = txt_seq_len + torch.where(repair_pos[b])[0]                          # C-slot repair positions
+        k_idx = txt_seq_len + agnostic_slot_idx_in_seq * img_tok_per_slot + torch.where(keep_pos[b])[0]
+        if q_idx.numel() == 0 or k_idx.numel() == 0:
+            continue
+        mask[b, 0, q_idx.unsqueeze(1), k_idx.unsqueeze(0)] = -1e4
+    return mask
+
+
 # ── exp420: Garment-Repair Gated Dual-Branch Module ──
 # Two asymmetric branches per block:
 #   garment branch: cross-attention Q=C_tokens, K=V=garment_tokens (garment identity)
@@ -725,6 +783,21 @@ def train_step(transformer,
 
     ATTN_MASK_HOLDER["mask"] = None
 
+    # USE_REPAIR_ATTN_MASK=1: block C-slot repair-band queries from attending to
+    # agnostic-slot out-of-mask keys (background-leak mitigation).
+    if int(os.environ.get("USE_REPAIR_ATTN_MASK", "0")):
+        # Find agnostic slot's index in the spatial-slot sequence (1 = first slot after C)
+        if "agnostic" in SLOT_ORDER:
+            agn_seq_idx = SLOT_ORDER.index("agnostic") + 1   # +1 because C is at slot 0
+        else:
+            agn_seq_idx = 1
+        wm_for_mask = batch["warped_mask"].to(device, dtype=weight_dtype)
+        if wm_for_mask.dim() == 3: wm_for_mask = wm_for_mask.unsqueeze(1)
+        ATTN_MASK_HOLDER["mask"] = build_repair_attn_mask(
+            M_full, wm_for_mask, pe_batch.shape[1], NUM_SLOTS,
+            B, device, weight_dtype, agnostic_slot_idx_in_seq=agn_seq_idx,
+        )
+
     # ── Main forward ──
     out = transformer(
         hidden_states              = hidden,
@@ -935,6 +1008,29 @@ def train_step(transformer,
     L_img = ((pred_img - person_imgs).abs() * weight_map_img).mean()
     L_img = L_img.to(L_flow.device, dtype=torch.float32)
 
+    # ── L_no_bg_leak: penalize pred matching out-of-mask "background" in repair band ──
+    # The halo/edge-line forms because repair-band pred gets dragged toward the
+    # background color (white) that surrounds the person outside the agnostic mask.
+    # We compute the mean per-image pixel value in the "outside mask" region of the
+    # cached person image (as a proxy for "what the out-of-agnostic area looks like"),
+    # and penalize pred being CLOSE to that mean value in the repair band.
+    # Push pred AWAY from bg_mean in the repair zone specifically.
+    L_no_bg_leak = torch.tensor(0.0, device=device)
+    lambda_no_bg = float(os.environ.get("LAMBDA_NO_BG_LEAK", "0.0"))
+    if lambda_no_bg > 0:
+        # Compute bg mean per sample from person_imgs outside agnostic mask.
+        # person_imgs is (B, 3, Hi, Wi) in [-1, 1]; M_full is at latent res so upsample.
+        M_full_img = F.interpolate(M_full.float(), size=(Hi, Wi), mode="nearest").to(vae_device, weight_dtype)
+        outside = (1.0 - M_full_img).expand_as(person_imgs)                # (B, 3, Hi, Wi)
+        denom = outside.sum(dim=(1, 2, 3), keepdim=True).clamp(min=1.0)
+        bg_mean = (person_imgs * outside).sum(dim=(1, 2, 3), keepdim=True) / denom  # (B, 1, 1, 1)
+        repair_img_mask_bg = F.interpolate(repair_band.float(), size=(Hi, Wi), mode="nearest").to(vae_device, weight_dtype)
+        # Distance from bg_mean in repair band (per-pixel). We want to MAXIMIZE this.
+        dist_from_bg = (pred_img - bg_mean).abs().mean(dim=1, keepdim=True)   # (B, 1, Hi, Wi)
+        # Penalize CLOSENESS to bg — i.e., loss = -distance (so gradient pushes dist up)
+        L_no_bg_leak = -(dist_from_bg * repair_img_mask_bg).sum() / (repair_img_mask_bg.sum() + 1e-6)
+        L_no_bg_leak = L_no_bg_leak.to(L_flow.device, dtype=torch.float32)
+
     # VGG perceptual loss (optional, enabled by USE_PERCEPTUAL env var)
     L_percep = torch.tensor(0.0, device=device)
     if int(os.environ.get("USE_PERCEPTUAL", "0")):
@@ -1053,7 +1149,8 @@ def train_step(transformer,
             + lambda_anti_grey * L_anti_grey
             + lambda_adv * L_adv
             + lambda_late_shell * L_late_shell
-            + lambda_tv_edge * L_tv_edge)
+            + lambda_tv_edge * L_tv_edge
+            + lambda_no_bg * L_no_bg_leak)
 
     return loss, {"flow": L_flow.item(),
                   "img": L_img.item(),
@@ -1180,6 +1277,15 @@ def main():
         transformer.enable_gradient_checkpointing()
 
     transformer.to(device)
+
+    # Install HoleyAttnProcessor when attention masking is enabled
+    if int(os.environ.get("USE_REPAIR_ATTN_MASK", "0")):
+        n_proc = 0
+        for mod in transformer.modules():
+            if hasattr(mod, "processor") and isinstance(mod.processor, QwenDoubleStreamAttnProcessor2_0):
+                mod.processor = HoleyAttnProcessor()
+                n_proc += 1
+        log.info(f"HoleyAttnProcessor installed on {n_proc} attention blocks")
 
     # exp420: install GarmentRepairGate on transformer blocks
     global GARMENT_GATES
@@ -1438,6 +1544,11 @@ def main():
     template_src = template_src.replace(
         "AGNOSTIC_ZERO_REPAIR = 0  # Set by train.py at save time",
         f"AGNOSTIC_ZERO_REPAIR = {agn_zero_rep_val}"
+    )
+    use_repair_mask_val = int(os.environ.get("USE_REPAIR_ATTN_MASK", "0"))
+    template_src = template_src.replace(
+        "USE_REPAIR_ATTN_MASK = 0  # Set by train.py at save time",
+        f"USE_REPAIR_ATTN_MASK = {use_repair_mask_val}"
     )
     sil_soft_sig_val = float(os.environ.get("SILHOUETTE_SOFT_SIG", "2.0"))
     template_src = template_src.replace(
