@@ -12,6 +12,7 @@ from collections import deque as _deque
 _VGG_MODEL = None
 _V6_HEADS = None
 _INVALID_TOKEN = None
+_DEPLOY_HALO_EVAL = False  # when True, train_step does a 20-step from-noise rollout + ring-contrast metric and returns early (no training)
 _REGION_ADAPTER = None
 _REGION_GATE = None
 _GARMENT_NET = None

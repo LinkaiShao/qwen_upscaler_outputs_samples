@@ -809,7 +809,7 @@ def main():
              "anti": 0.0, "tv": 0.0, "alloc": 0.0, "broad": 0.0, "percep": 0.0,
              "antirough": 0.0, "antigrey": 0.0, "adv": 0.0, "critic": 0.0, "late": 0.0, "sigma": 0.0,
              # 5_30 new (instructions7)
-             "bnd": 0.0, "bgc": 0.0, "bgf": 0.0, "gem": 0.0, "brs": 0.0, "bel1": 0.0, "belg": 0.0, "gcl": 0.0, "rbi": 0.0, "rsi": 0.0, "tve": 0.0,
+             "bnd": 0.0, "bgc": 0.0, "bgf": 0.0, "gem": 0.0, "brs": 0.0, "harm": 0.0, "bel1": 0.0, "belg": 0.0, "gcl": 0.0, "rbi": 0.0, "rsi": 0.0, "tve": 0.0,
              "img_g": 0.0, "img_s": 0.0, "img_b": 0.0, "img_other": 0.0, "img_k": 0.0, "img_ub": 0.0,
              "rou": 0.0, "rep": 0.0, "hf_g": 0.0, "band": 0.0, "bandg": 0.0, "bandhp": 0.0,
              "phk": 0.0, "bsk": 0.0, "bsab": 0.0, "iheab": 0.0, "ihehf": 0.0,
@@ -915,6 +915,31 @@ def main():
                 vf = accs["flow"] / accs["n"]
                 log.info(f"[val] {label} n={accs['n']} flow={vf:.5f} img={vi:.4f}")
                 val_img_hist.append(vi)
+            # ── hourly in-loop DEPLOYED-HALO eval (DEPLOY_HALO_EVAL=1): full from-noise
+            #    rollout + ring-contrast on the reserved ids, so we WATCH the deployed halo. ──
+            if int(os.environ.get("DEPLOY_HALO_EVAL", "0")) and \
+               (time.time() - _last_halo_eval["t"]) >= float(os.environ.get("DEPLOY_EVAL_HOURS", "1.0")) * 3600.0:
+                _last_halo_eval["t"] = time.time()
+                state._DEPLOY_HALO_EVAL = True
+                _hc = {"c": 0.0, "r": 0.0, "s": 0.0, "n": 0}
+                try:
+                    for vb in val_loader:
+                        try:
+                            with torch.amp.autocast("cuda", dtype=dtype):
+                                _, hm = train_step(
+                                    transformer, pose_cache, prompt_cache, vae, person_image_cache,
+                                    vae_device, img_loss_weight, loss_weights, vb, device, dtype,
+                                    sigma_beta_alpha=args.sigma_beta_alpha, sigma_beta_beta=args.sigma_beta_beta,
+                                    global_step=global_step, max_steps=MAX_STEPS)
+                            _hc["c"] += hm.get("deploy_halo", 0.0); _hc["r"] += hm.get("halo_ring", 0.0)
+                            _hc["s"] += hm.get("halo_surr", 0.0); _hc["n"] += 1
+                        except Exception as e:
+                            log.error(f"[halo] {e}")
+                finally:
+                    state._DEPLOY_HALO_EVAL = False
+                if _hc["n"]:
+                    log.info(f"[HALO] {label} step={global_step} n={_hc['n']} "
+                             f"contrast={_hc['c']/_hc['n']:+.2f} ring={_hc['r']/_hc['n']:+.2f} surr={_hc['s']/_hc['n']:+.2f}")
         except Exception as e:
             log.error(f"[val] outer error: {e}")
         finally:
@@ -924,6 +949,7 @@ def main():
                 torch.cuda.set_rng_state(_prev_cuda, device=device)
 
     _last_val_step = {"step": -1}
+    _last_halo_eval = {"t": 0.0}  # wall-clock timer for the in-loop deployed-halo eval (DEPLOY_HALO_EVAL)
     _last_save_time = {"t": time.time()}  # wall-clock save timer (SAVE_EVERY_SECONDS)
     def _run_val(ep):
         if not VAL_PER_EPOCH: return
@@ -1204,6 +1230,7 @@ def main():
                                  f"bgf={accum.get('bgf', 0.0)/n:.4f} "
                                  f"gem={accum.get('gem', 0.0)/n:.4f} "
                                  f"brs={accum.get('brs', 0.0)/n:.4f} "
+                                 f"harm={accum.get('harm', 0.0)/n:.4f} "
                                  f"bel1={accum.get('bel1',0.0)/n:.4f} belg={accum.get('belg',0.0)/n:.4f} "
                                  f"img_g={accum.get('img_g',0.0)/n:.4f} img_s={accum.get('img_s',0.0)/n:.4f} "
                                  f"img_b={accum.get('img_b',0.0)/n:.4f} img_other={accum.get('img_other',0.0)/n:.4f} "
