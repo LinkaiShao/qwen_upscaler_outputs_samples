@@ -1,0 +1,7 @@
+[e2] START Tue Jul 14 09:22:47 PM PDT 2026  ckpt=runs/MASKTRAJ_0714_1837/final/garment_vel_denoiser.pt
+[e2] SMOKE (2 ids) baseline vs correct — quarantine proof (bg/skin identical) Tue Jul 14 09:22:47 PM PDT 2026
+=== TWO-TRACK SMOKE (2 ids): bg/skin OUTSIDE garment (CLOUD/farbg/skinL1) must be IDENTICAL ===
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1
+BASELINE : CORRECT  : (CLOUD/farbg/skinL1 identical -> quarantine works; garL1 may differ = garment changed)
+[e2] FULL (5 ids) 4 conditions Tue Jul 14 09:29:35 PM PDT 2026
+[e2] ALL DONE Tue Jul 14 09:57:04 PM PDT 2026

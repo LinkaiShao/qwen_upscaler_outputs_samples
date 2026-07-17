@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=RUNA_ENH59_0715_180545  LOG=bgsmearresearch/state_enhancer_A_block59/RUNA_ENH59_0715_180545.log
+train.py exited rc=0 RUN_NAME=RUNA_ENH59_0715_180545

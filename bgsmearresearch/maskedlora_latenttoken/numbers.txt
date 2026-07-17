@@ -1,0 +1,11 @@
+=== GARMENT ADAPTER EVAL — mode=latent_token  run=runs/RUN7_MLORA_0715_150154  deploy on 5 reserved. Wed Jul 15 05:24:36 PM PDT 2026 ===
+cols: CLOUD editBGdL editNBdL editAlldL wholeBGdL farBGdL ePSNR eSSIM garL1 skinL1
+run37 BASELINE  :      7.18    -3.45     0.23     -0.63      8.77   12.41  21.11  0.810  21.37  18.93
+adapter CORRECT :     83.56  -122.85   -13.62    -46.10    -14.80   18.29   9.96  0.425  60.29  46.41
+adapter WRONG   :     78.50  -114.91     0.35    -33.98    -12.87   18.45  10.08  0.418  64.94  43.89
+adapter BRANCH  :     79.93  -117.16    -4.23    -37.86    -13.39   18.40  10.05  0.419  64.07  44.36   (BYPASS=1 -> RUN_DIR without adapter; pure run37 is BASELINE)
+--- VERDICT ---
+garL1  baseline=21.37  correct=60.29  wrong=64.94  branchoff=64.07  spread=4.65
+bg/skin  CLOUD b=7.18 c=83.56 | farBG b=12.41 c=18.29 | skinL1 b=18.93 c=46.41
+VERDICT: REJECT — CORRECT degrades bg/skin vs baseline (CLOUD/farBG/skinL1 worse by >0.5).
+panel -> bgsmearresearch/maskedlora_latenttoken/IDENTITY_panel.png

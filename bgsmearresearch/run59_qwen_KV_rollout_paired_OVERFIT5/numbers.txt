@@ -1,0 +1,18 @@
+=== run57 — Qwen garment K/V branch (attend-to-memory), 5-id OVERFIT, SOAR off, LoRA+v6 frozen ===
+training end state: done
+[bridge] gar=0.0783 base=0.0783 GAIN=+0.0000 wrong=0.0783 | d_bg=0.00113 d_skin=0.00094 d_far=0.00123 d_ring=0.00089 zero=0.0300 roll=0.00158 | total=1.4406
+[bridge] gar=0.0999 base=0.1010 GAIN=+0.0012 wrong=0.0999 | d_bg=0.00230 d_skin=0.00186 d_far=0.00241 d_ring=0.00238 zero=0.0288 roll=0.00269 | total=1.5318
+[bridge] gar=0.0808 base=0.0810 GAIN=+0.0002 wrong=0.0808 | d_bg=0.00133 d_skin=0.00120 d_far=0.00157 d_ring=0.00117 zero=0.0298 roll=0.00170 | total=1.4516
+[bridge] gar=0.0722 base=0.0723 GAIN=+0.0000 wrong=0.0723 | d_bg=0.00092 d_skin=0.00084 d_far=0.00098 d_ring=0.00090 zero=0.0300 roll=0.00130 | total=1.4099
+[bridge] gar=0.0910 base=0.0913 GAIN=+0.0003 wrong=0.0910 | d_bg=0.00158 d_skin=0.00165 d_far=0.00161 d_ring=0.00180 zero=0.0297 roll=0.00204 | total=1.4920
+[bridge] gar=0.0692 base=0.0693 GAIN=+0.0001 wrong=0.0692 | d_bg=0.00100 d_skin=0.00110 d_far=0.00105 d_ring=0.00112 zero=0.0299 roll=0.00185 | total=1.4198
+[bridge] gar=0.0787 base=0.0786 GAIN=-0.0001 wrong=0.0787 | d_bg=0.00113 d_skin=0.00112 d_far=0.00122 d_ring=0.00113 zero=0.0301 roll=0.00142 | total=1.4376
+[bridge] gar=0.1185 base=0.1225 GAIN=+0.0040 wrong=0.1204 | d_bg=0.00242 d_skin=0.00238 d_far=0.00264 d_ring=0.00385 zero=0.0260 roll=0.00295 | total=1.5220
+gate_logits: [-1.891, -1.874, -1.898] -> gates: [0.1312, 0.1331, 0.1304] (init 0.018)
+
+branch OFF (== run37):      3.41    -3.72    -1.96     -2.48     -4.04   -4.39  21.63  0.836  15.07  10.96
+branch ON            :      4.14    -4.60    -1.28     -2.30     -4.63   -4.85  21.71  0.840  14.38  10.95
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1
+ACCEPT: garL1 down AND CLOUD/far_bg/skin held. run37 ref: CLOUD 3.42 far -4.40 gar 15.11 skin 10.96
+panels -> bgsmearresearch/run59_qwen_KV_rollout_paired_OVERFIT5
+DONE

@@ -1,0 +1,14 @@
+[eval] START Wed Jul 15 04:16:48 AM PDT 2026  RUN_DIR=runs/RUN2_INPUTADAPTER_LORA_0715_015055  MODE=input_hidden  OUT=bgsmearresearch/inputadapter_lora
+[eval] adapter ckpt=runs/RUN2_INPUTADAPTER_LORA_0715_015055/final/garment_adapter.pt  blocks=''
+[eval] rendering 4 conditions x 5 ids Wed Jul 15 04:16:48 AM PDT 2026
+=== GARMENT ADAPTER EVAL — mode=input_hidden  run=runs/RUN2_INPUTADAPTER_LORA_0715_015055  deploy on 5 reserved. Wed Jul 15 04:34:27 AM PDT 2026 ===
+cols: CLOUD editBGdL editNBdL editAlldL wholeBGdL farBGdL ePSNR eSSIM garL1 skinL1
+run37 BASELINE  :      7.19    -3.44     0.63     -0.35      8.79   12.43  21.11  0.810  21.58  18.96
+adapter CORRECT :      8.85    -8.86    -4.92     -5.87      4.86    9.08  20.69  0.799  19.87  18.92
+adapter WRONG   :     10.31   -11.10    -0.79     -3.50      4.48    9.14  20.44  0.783  22.05  18.95
+adapter BRANCH  :      8.43    -8.13    -4.72     -5.51      4.92    9.00  20.49  0.796  21.88  18.77   (BYPASS=1 -> run37's own output, NOT adapter=0)
+--- VERDICT ---
+garL1  baseline=21.58  correct=19.87  wrong=22.05  branchoff=21.88  spread=2.18
+bg/skin  CLOUD b=7.19 c=8.85 | farBG b=12.43 c=9.08 | skinL1 b=18.96 c=18.92
+VERDICT: REJECT — CORRECT degrades bg/skin vs baseline (CLOUD/farBG/skinL1 worse by >0.5).
+[eval] ALL DONE Wed Jul 15 04:34:27 AM PDT 2026  -> bgsmearresearch/inputadapter_lora/numbers.txt  bgsmearresearch/inputadapter_lora/IDENTITY_panel.png

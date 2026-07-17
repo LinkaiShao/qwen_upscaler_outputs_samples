@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=RUN5_ADALN_0715_092646  LOG=bgsmearresearch/spatial_adaln/RUN5_ADALN_0715_092646.log
+train.py exited rc=0 RUN_NAME=RUN5_ADALN_0715_092646

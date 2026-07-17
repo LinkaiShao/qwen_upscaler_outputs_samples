@@ -1,0 +1,10 @@
+=== run69_ootd_cotrain_lora_OVERFIT5 (run_run69.sh, arch=ootd) Sun Jul 12 05:11:31 PM PDT 2026 ===
+[smoke] errs=0 branch_alive=1 (log=logs/SMOKE_run69_ootd_cotrain_lora_OVERFIT5.log)
+1hr RUN_NAME=RUN_run69_ootd_cotrain_lora_OVERFIT5_171629
+
+--- in-loop tail (log) ---
+garment_ootd: loading fresh transformer for branch block-copy from indices [36, 44, 50, 55]...
+garment_ootd: branch — copied main-model block weights from indices [36, 44, 50, 55]
+garment_ootd: installed OOTDQwenAttnProcessor on main blocks [36, 44, 50, 55] (4 attn blocks)
+garment_ootd: branch_blocks 1,359,325,184 @ lr=3.0e-06; branch_aux 9,643,008 @ lr=3.0e-05; inj_kv 75,522,048 @ lr=3.0e-05; gates 4 @ lr=1.0e-03 (fp32, init=-2.0)
+[DEPLOY] step=108 step=108 GARMENT dim=+7.24 L1=33.44 | SKIN dim=+1.60 L1=16.93 chroma=0.6(gt 0.6) | BG dim=-1.59 L1=5.64 | BAND_OFFSET=-1.83 (target -1)

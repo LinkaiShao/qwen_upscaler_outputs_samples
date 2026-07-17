@@ -1,0 +1,24 @@
+=== Run64 OOTD per-block K/V (blocks 36,44,50,55, warped-mask gate, 20% dropout) 1hr OVERFIT5 ===
+RN=PROBE4_ootd_perblock_kv_1hr_0711_133414  started Sat Jul 11 01:37:11 PM PDT 2026
+
+--- in-loop [bridge] 4-way (PRIMARY GATE): gar / wrong / shuf / zero -- first / mid / last ---
+[bridge] gar=0.1239 base=0.1239 GAIN=+0.0000 wrong=0.1239 shuf=0.1239 zero=0.1239 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.1755
+Epoch 2:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.0851 base=0.0851 GAIN=+0.0000 wrong=0.0851 shuf=0.0851 zero=0.0851 | d_bg=0.00170 d_skin=0.00150 d_far=0.00173 d_ring=0.00136 zero=0.0300 roll=0.00000 | total=1.0971
+  ...
+Epoch 38:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.1017 base=0.1076 GAIN=+0.0059 wrong=0.1024 shuf=0.1016 zero=0.1076 | d_bg=0.00258 d_skin=0.00275 d_far=0.00276 d_ring=0.00470 zero=0.0241 roll=0.00000 | total=1.1333
+  ...
+[bridge] gar=0.0640 base=0.0640 GAIN=+0.0000 wrong=0.0640 shuf=0.0640 zero=0.0640 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.0515
+Epoch 74:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.0700 base=0.0705 GAIN=+0.0005 wrong=0.0701 shuf=0.0699 zero=0.0705 | d_bg=0.00147 d_skin=0.00138 d_far=0.00149 d_ring=0.00310 zero=0.0295 roll=0.00000 | total=1.0658
+[bridge] gar=0.0692 base=0.0692 GAIN=+0.0000 wrong=0.0692 shuf=0.0692 zero=0.0692 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.0675
+Epoch 78:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.0840 base=0.0844 GAIN=+0.0004 wrong=0.0841 shuf=0.0840 zero=0.0844 | d_bg=0.00187 d_skin=0.00199 d_far=0.00206 d_ring=0.00346 zero=0.0296 roll=0.00000 | total=1.1065
+[bridge] gar=0.0638 base=0.0639 GAIN=+0.0001 wrong=0.0639 shuf=0.0638 zero=0.0639 | d_bg=0.00122 d_skin=0.00122 d_far=0.00122 d_ring=0.00273 zero=0.0299 roll=0.00000 | total=1.0495
+
+Error step count: 0 | cond dropped: 1
+[DEPLOY]:
+[DEPLOY] step=326 step=326 GARMENT dim=+2.46 L1=16.35 | SKIN dim=+2.45 L1=15.22 chroma=0.6(gt 0.6) | BG dim=-1.35 L1=5.26 | BAND_OFFSET=-1.60 (target -1)
+
+--- deployed (best-effort) cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1 | run37 garL1~15.1 ---
+OOTD OFF (run37):      3.40    -3.70    -1.95     -2.47     -4.04   -4.39  21.63  0.836  15.00  10.96
+OOTD ON         :      2.48    -2.94     0.79     -0.31     -2.70   -2.84  21.93  0.844  12.75  10.32
+panels ok
+DONE Sat Jul 11 02:50:24 PM PDT 2026

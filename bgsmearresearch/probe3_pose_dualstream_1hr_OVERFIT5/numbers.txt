@@ -1,0 +1,23 @@
+=== Run63 Pose-Aligned Dense Residual GNet (blocks 36,44,50,55, zero-init gated) 1hr OVERFIT5 ===
+RN=PROBE3_pose_dualstream_1hr_0712_132134  started Sun Jul 12 01:21:54 PM PDT 2026
+
+--- in-loop [bridge] 4-way (PRIMARY GATE): gar / wrong / shuf / zero -- first / mid / last ---
+[bridge] gar=0.1041 base=0.1041 GAIN=+0.0000 wrong=0.1041 id_frac=+0.000 shuf=0.1041 zero=0.1041 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.1451
+Epoch 2:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.1164 base=0.1164 GAIN=+0.0000 wrong=0.1164 id_frac=+0.000 shuf=0.1164 zero=0.1164 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.1651
+  ...
+[bridge] gar=0.0729 base=0.0729 GAIN=+0.0000 wrong=0.0729 id_frac=+0.000 shuf=0.0729 zero=0.0729 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.0775
+  ...
+Epoch 70:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.1261 base=0.1261 GAIN=+0.0000 wrong=0.1261 id_frac=+0.000 shuf=0.1261 zero=0.1261 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.1785
+[bridge] gar=0.0577 base=0.0577 GAIN=+0.0000 wrong=0.0577 id_frac=+0.000 shuf=0.0577 zero=0.0577 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.0337
+Epoch 74:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.1301 base=0.1301 GAIN=+0.0000 wrong=0.1301 id_frac=+0.000 shuf=0.1301 zero=0.1301 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.1847
+[bridge] gar=0.1078 base=0.1078 GAIN=+0.0000 wrong=0.1078 id_frac=+0.000 shuf=0.1078 zero=0.1078 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.1544
+
+[DEPLOY] in-loop rollout lines:
+[DEPLOY] step=309 step=309 GARMENT dim=+1.61 L1=16.88 | SKIN dim=+2.37 L1=15.45 chroma=0.6(gt 0.6) | BG dim=-1.35 L1=5.27 | BAND_OFFSET=-1.60 (target -1)
+
+--- deployed (best-effort; NOTE: deploy path may not populate G_feat -> ON may==OFF) ---
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1 | run37 garL1~15.1
+branch OFF (run37):      3.41    -3.72    -1.98     -2.50     -4.04   -4.39  21.62  0.836  15.09  10.96
+branch ON         :      2.87    -3.19    -1.29     -1.88     -3.27   -3.48  21.65  0.837  14.75  10.59
+panels ok
+DONE Sun Jul 12 02:37:25 PM PDT 2026

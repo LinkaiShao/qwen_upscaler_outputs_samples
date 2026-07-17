@@ -1,0 +1,6 @@
+[mt] START MASKTRAJ_0714_1837 Tue Jul 14 06:37:31 PM PDT 2026  log=bgsmearresearch/mask_traj_blend_OVERFIT5/MASKTRAJ_0714_1837.log
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=MASKTRAJ_0714_1837  LOG=bgsmearresearch/mask_traj_blend_OVERFIT5/MASKTRAJ_0714_1837.log
+train.py exited rc=0 RUN_NAME=MASKTRAJ_0714_1837 LOG=bgsmearresearch/mask_traj_blend_OVERFIT5/MASKTRAJ_0714_1837.log
+[mt] train done rc=0 Tue Jul 14 07:38:42 PM PDT 2026
+[mt] ALL DONE Tue Jul 14 08:08:59 PM PDT 2026

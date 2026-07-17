@@ -1,0 +1,4 @@
+WARM-START from SOAR (long-form setup probe): 
+[BC_MULTI] MULTI-GARMENT: OVERFIT_SIDS unset, training on full dataset
+RUN_NAME=KV01_cotrain_114848  LOG=bgsmearresearch/KV01_cotrain_contrast/KV01_cotrain_114848.log
+train.py exited rc=0 RUN_NAME=KV01_cotrain_114848

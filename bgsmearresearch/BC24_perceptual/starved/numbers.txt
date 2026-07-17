@@ -1,0 +1,11 @@
+=== GARMENT ADAPTER EVAL — mode=state_enhancer  run=runs/BC24_perc_061921  deploy on 5 reserved. Thu Jul 16 08:42:43 AM PDT 2026 ===
+cols: CLOUD editBGdL editNBdL editAlldL wholeBGdL farBGdL ePSNR eSSIM garL1 skinL1
+run37 BASELINE  :      7.38    -4.03     1.28     -0.07      8.58   12.35  21.08  0.809  21.90  18.96
+adapter CORRECT :      7.77    -5.36     0.14     -1.28      8.05   12.06  21.10  0.809  21.51  18.88
+adapter WRONG   :      7.86    -5.52     0.28     -1.23      8.03   12.08  21.09  0.809  21.49  18.87
+adapter BRANCH  :      7.81    -5.43     0.07     -1.35      8.03   12.06  21.09  0.809  21.39  18.91   (BYPASS=1 -> RUN_DIR without adapter; pure run37 is BASELINE)
+--- VERDICT ---
+garL1  baseline=21.90  correct=21.51  wrong=21.49  branchoff=21.39  spread=0.12
+bg/skin  CLOUD b=7.38 c=7.77 | farBG b=12.35 c=12.06 | skinL1 b=18.96 c=18.88
+VERDICT: REJECT — correct≈wrong≈branchoff (garL1 within 0.3): adapter is inert / not garment-specific.
+panel -> bgsmearresearch/BC24_perceptual/starved/IDENTITY_panel.png

@@ -1,0 +1,5 @@
+chain started Sat Jul 11 04:33:28 PM PDT 2026
+Run65 done; GPU free. Smoking Run66 Sat Jul 11 04:33:28 PM PDT 2026
+smoke: Error_step=0 Traceback=0 bridge_lines=2 Sat Jul 11 04:35:04 PM PDT 2026
+[bridge] gar=0.1239 base=0.1239 GAIN=+0.0000 wrong=0.1239 id_frac=+0.000 shuf=0.0000 zero=0.1239 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=5.9306
+Run66 LAUNCHED as PROBE6_ootd_highpass_2hr_0711_163504 + watcher Sat Jul 11 04:35:09 PM PDT 2026

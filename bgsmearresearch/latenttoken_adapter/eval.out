@@ -1,0 +1,14 @@
+[eval] START Wed Jul 15 06:41:35 AM PDT 2026  RUN_DIR=runs/RUN3_LATENTTOKEN_0715_043738  MODE=latent_token  OUT=bgsmearresearch/latenttoken_adapter
+[eval] adapter ckpt=runs/RUN3_LATENTTOKEN_0715_043738/final/garment_adapter.pt  blocks=''
+[eval] rendering 4 conditions x 5 ids Wed Jul 15 06:41:35 AM PDT 2026
+=== GARMENT ADAPTER EVAL — mode=latent_token  run=runs/RUN3_LATENTTOKEN_0715_043738  deploy on 5 reserved. Wed Jul 15 06:59:25 AM PDT 2026 ===
+cols: CLOUD editBGdL editNBdL editAlldL wholeBGdL farBGdL ePSNR eSSIM garL1 skinL1
+run37 BASELINE  :      7.33    -3.71     0.56     -0.46      8.74   12.43  21.06  0.809  21.87  18.99
+adapter CORRECT :     10.15   -11.27    -3.65     -5.65      3.80    8.26  20.16  0.783  19.38  22.26
+adapter WRONG   :     10.15   -11.08     6.26      1.54      3.87    8.33  20.15  0.770  24.21  18.54
+adapter BRANCH  :     10.64   -11.83    -2.44     -4.89      3.82    8.48  20.28  0.779  21.96  18.98   (BYPASS=1 -> run37's own output, NOT adapter=0)
+--- VERDICT ---
+garL1  baseline=21.87  correct=19.38  wrong=24.21  branchoff=21.96  spread=4.83
+bg/skin  CLOUD b=7.33 c=10.15 | farBG b=12.43 c=8.26 | skinL1 b=18.99 c=22.26
+VERDICT: REJECT — CORRECT degrades bg/skin vs baseline (CLOUD/farBG/skinL1 worse by >0.5).
+[eval] ALL DONE Wed Jul 15 06:59:26 AM PDT 2026  -> bgsmearresearch/latenttoken_adapter/numbers.txt  bgsmearresearch/latenttoken_adapter/IDENTITY_panel.png

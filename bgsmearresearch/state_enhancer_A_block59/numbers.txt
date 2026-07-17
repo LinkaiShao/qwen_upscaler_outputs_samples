@@ -1,0 +1,11 @@
+=== GARMENT ADAPTER EVAL — mode=state_enhancer  run=runs/RUNA_ENH59_0715_180545  deploy on 5 reserved. Wed Jul 15 08:26:43 PM PDT 2026 ===
+cols: CLOUD editBGdL editNBdL editAlldL wholeBGdL farBGdL ePSNR eSSIM garL1 skinL1
+run37 BASELINE  :      7.16    -3.38     0.28     -0.59      8.81   12.45  21.11  0.810  21.48  18.97
+adapter CORRECT :      8.86    -8.94    -3.44     -4.85      4.64    8.73  20.71  0.795  19.35  18.88
+adapter WRONG   :      8.90    -8.99    -3.39     -4.83      4.59    8.69  20.71  0.795  19.36  18.89
+adapter BRANCH  :      8.87    -8.98    -3.53     -4.92      4.58    8.67  20.70  0.795  19.35  18.99   (BYPASS=1 -> RUN_DIR without adapter; pure run37 is BASELINE)
+--- VERDICT ---
+garL1  baseline=21.48  correct=19.35  wrong=19.36  branchoff=19.35  spread=0.01
+bg/skin  CLOUD b=7.16 c=8.86 | farBG b=12.45 c=8.73 | skinL1 b=18.97 c=18.88
+VERDICT: REJECT — correct≈wrong≈branchoff (garL1 within 0.3): adapter is inert / not garment-specific.
+panel -> bgsmearresearch/state_enhancer_A_block59/IDENTITY_panel.png

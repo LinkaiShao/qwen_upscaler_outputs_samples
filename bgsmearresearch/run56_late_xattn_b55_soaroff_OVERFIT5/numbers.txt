@@ -1,0 +1,10 @@
+=== run56 — late xattn @ block 55, SOAR OFF, fp32 branch, out-init 1e-4 (per user spec) ===
+decision at ~500 steps: GAIN_mean=? wrong-gar_gap=? (n=0)  -> stopped
+[bridge] gar=0.0105 base=0.0105 GAIN=+0.0000 wrong=0.0105 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 | total=0.0774
+Epoch 14:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.1469 base=0.1469 GAIN=+0.0000 wrong=0.0000 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 | total=0.4100
+[bridge] gar=0.1194 base=0.1194 GAIN=+0.0000 wrong=0.1194 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 | total=0.3747
+Epoch 18:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.0766 base=0.0766 GAIN=+0.0000 wrong=0.0000 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 | total=0.2670
+[bridge] gar=0.0741 base=0.0741 GAIN=+0.0000 wrong=0.0741 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 | total=0.2856
+Epoch 22:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.0671 base=0.0671 GAIN=+0.0000 wrong=0.0000 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 | total=0.2548
+[bridge] gar=0.0770 base=0.0770 GAIN=+0.0000 wrong=0.0770 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 | total=0.2991
+Epoch 26:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.0952 base=0.0952 GAIN=+0.0000 wrong=0.0000 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 | total=0.3186

@@ -1,0 +1,23 @@
+=== probe1_ootd_kv_50-55-59 : late blocks (default) ===
+blocks=50,55,59  RN=PROBEQ_probe1_ootd_kv_505559_0710_233215  started Fri Jul 10 11:32:15 PM PDT 2026
+
+--- in-loop [bridge] 4-way (PRIMARY GATE) : first / mid / last ---
+[bridge] gar=0.0057 base=0.0057 GAIN=+0.0000 wrong=0.0057 shuf=0.0057 zero=0.0057 | d_bg=0.00004 d_skin=0.00004 d_far=0.00005 d_ring=0.00004 zero=0.0300 roll=0.00000 | total=0.8517
+[bridge] gar=0.0236 base=0.0236 GAIN=+0.0000 wrong=0.0236 shuf=0.0236 zero=0.0236 | d_bg=0.00022 d_skin=0.00022 d_far=0.00019 d_ring=0.00025 zero=0.0300 roll=0.00000 | total=0.9175
+  ...
+[bridge] gar=0.0589 base=0.0590 GAIN=+0.0001 wrong=0.0589 shuf=0.0589 zero=0.0590 | d_bg=0.00094 d_skin=0.00131 d_far=0.00086 d_ring=0.00145 zero=0.0299 roll=0.00000 | total=1.0303
+  ...
+[bridge] gar=0.0753 base=0.0755 GAIN=+0.0002 wrong=0.0752 shuf=0.0753 zero=0.0755 | d_bg=0.00122 d_skin=0.00121 d_far=0.00136 d_ring=0.00158 zero=0.0298 roll=0.00000 | total=1.0847
+[bridge] gar=0.0592 base=0.0592 GAIN=+0.0000 wrong=0.0593 shuf=0.0592 zero=0.0592 | d_bg=0.00065 d_skin=0.00088 d_far=0.00067 d_ring=0.00099 zero=0.0300 roll=0.00000 | total=1.0406
+[bridge] gar=0.0973 base=0.1003 GAIN=+0.0030 wrong=0.0992 shuf=0.0973 zero=0.1003 | d_bg=0.00226 d_skin=0.00260 d_far=0.00213 d_ring=0.00472 zero=0.0270 roll=0.00000 | total=1.1175
+[bridge] gar=0.0830 base=0.0842 GAIN=+0.0011 wrong=0.0837 shuf=0.0830 zero=0.0842 | d_bg=0.00186 d_skin=0.00219 d_far=0.00162 d_ring=0.00265 zero=0.0289 roll=0.00000 | total=1.0876
+
+[DEPLOY] in-loop rollout lines (if any):
+[DEPLOY] step=345 step=345 GARMENT dim=+0.07 L1=13.72 | SKIN dim=+2.00 L1=14.34 chroma=0.6(gt 0.6) | BG dim=-0.72 L1=3.94 | BAND_OFFSET=-0.96 (target -1)
+[DEPLOY] step=664 step=664 GARMENT dim=+0.10 L1=13.17 | SKIN dim=+2.05 L1=14.35 chroma=0.6(gt 0.6) | BG dim=-0.74 L1=3.96 | BAND_OFFSET=-0.99 (target -1)
+
+--- deployed (best-effort) cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1 | run37 garL1~15.1 ---
+branch OFF (run37):      3.41    -3.73    -2.01     -2.52     -4.05   -4.39  21.61  0.836  15.10  10.96
+branch ON         :      3.99    -4.21    -1.83     -2.57     -4.61   -4.92  21.97  0.846  13.07  10.83
+panels ok
+DONE Sat Jul 11 01:47:35 AM PDT 2026

@@ -1,0 +1,8 @@
+=== CO-TRAIN run37 LoRA + OOTD gnet (FULL data 2h) — deploy identity on 5 held-out reserved ===
+run=COTRAIN_0714_1524  Tue Jul 14 05:48:57 PM PDT 2026
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1
+run37 BASELINE  :      3.42    -3.74    -2.01     -2.53     -4.05   -4.39  21.62  0.836  15.10  10.97
+co-train CORRECT:     23.29   -14.01    -0.85     -4.77    -43.70  -54.36  19.81  0.801  15.41  18.11
+co-train WRONG  :     23.20   -13.81    -0.74     -4.63    -43.70  -54.26  19.83  0.802  15.34  18.18
+WIN iff garL1(correct) < garL1(baseline) [detail added] AND garL1(correct) < garL1(wrong) [specific garment].
+panel ok

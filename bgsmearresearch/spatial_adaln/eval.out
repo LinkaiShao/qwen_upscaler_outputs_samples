@@ -1,0 +1,14 @@
+[eval] START Wed Jul 15 11:29:25 AM PDT 2026  RUN_DIR=runs/RUN5_ADALN_0715_092646  MODE=spatial_adaln  OUT=bgsmearresearch/spatial_adaln
+[eval] adapter ckpt=runs/RUN5_ADALN_0715_092646/final/garment_adapter.pt  blocks='12,20,28,36'
+[eval] rendering 4 conditions x 5 ids Wed Jul 15 11:29:25 AM PDT 2026
+=== GARMENT ADAPTER EVAL — mode=spatial_adaln  run=runs/RUN5_ADALN_0715_092646  deploy on 5 reserved. Wed Jul 15 11:47:40 AM PDT 2026 ===
+cols: CLOUD editBGdL editNBdL editAlldL wholeBGdL farBGdL ePSNR eSSIM garL1 skinL1
+run37 BASELINE  :      7.21    -3.47     0.19     -0.67      8.78   12.42  21.10  0.810  21.40  19.00
+adapter CORRECT :     10.97   -12.26    -6.46     -7.81      4.60    9.57  20.04  0.769  22.89  18.77
+adapter WRONG   :     10.67   -11.91    -6.19     -7.56      4.49    9.32  20.05  0.775  22.44  18.66
+adapter BRANCH  :      9.72   -10.43    -5.44     -6.64      4.79    9.31  20.43  0.794  20.39  18.60   (BYPASS=1 -> run37's own output, NOT adapter=0)
+--- VERDICT ---
+garL1  baseline=21.40  correct=22.89  wrong=22.44  branchoff=20.39  spread=2.50
+bg/skin  CLOUD b=7.21 c=10.97 | farBG b=12.42 c=9.57 | skinL1 b=19.00 c=18.77
+VERDICT: REJECT — CORRECT degrades bg/skin vs baseline (CLOUD/farBG/skinL1 worse by >0.5).
+[eval] ALL DONE Wed Jul 15 11:47:40 AM PDT 2026  -> bgsmearresearch/spatial_adaln/numbers.txt  bgsmearresearch/spatial_adaln/IDENTITY_panel.png

@@ -1,0 +1,11 @@
+=== GARMENT ADAPTER EVAL — mode=detail_slot  run=runs/RUN4_DETAILSLOT_0715_070245  deploy on 5 reserved. Wed Jul 15 09:23:10 AM PDT 2026 ===
+cols: CLOUD editBGdL editNBdL editAlldL wholeBGdL farBGdL ePSNR eSSIM garL1 skinL1
+run37 BASELINE  :      7.21    -3.46     0.50     -0.45      8.80   12.45  21.09  0.809  21.70  19.01
+adapter CORRECT :      8.66    -9.55    -5.79     -6.25      3.09    6.47  17.89  0.767  36.05  19.31
+adapter WRONG   :      8.55    -9.38    -2.82     -4.20      3.11    6.45  17.72  0.764  36.82  19.64
+adapter BRANCH  :      8.90    -9.55    -4.49     -5.74      3.92    8.02  20.66  0.799  19.05  18.48   (BYPASS=1 -> run37's own output, NOT adapter=0)
+--- VERDICT ---
+garL1  baseline=21.70  correct=36.05  wrong=36.82  branchoff=19.05  spread=17.77
+bg/skin  CLOUD b=7.21 c=8.66 | farBG b=12.45 c=6.47 | skinL1 b=19.01 c=19.31
+VERDICT: REJECT — CORRECT degrades bg/skin vs baseline (CLOUD/farBG/skinL1 worse by >0.5).
+panel -> bgsmearresearch/learned_detail_slot/IDENTITY_panel.png

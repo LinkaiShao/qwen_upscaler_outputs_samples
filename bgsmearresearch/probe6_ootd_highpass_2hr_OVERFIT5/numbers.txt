@@ -1,0 +1,19 @@
+=== Run66 OOTD HIGH-PASS identity branch (blocks 36,44,50,55, warped-mask gate, 20% dropout) 1hr OVERFIT5 ===
+RN=PROBE6_ootd_highpass_2hr_0711_163826  started Sat Jul 11 04:40:00 PM PDT 2026
+
+--- in-loop [bridge] 4-way (PRIMARY GATE): gar / wrong / shuf / zero -- first / mid / last ---
+[bridge] hard-wrong pool cached: 256 colour vectors
+[bridge] gar=0.1239 base=0.1239 GAIN=+0.0000 wrong=0.1239 id_frac=+0.000 shuf=0.0000 zero=0.1239 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=5.9306
+  ...
+Epoch 66:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.1095 base=0.1186 GAIN=+0.0092 wrong=0.1092 id_frac=-0.024 shuf=0.0000 zero=0.1186 | d_bg=0.00444 d_skin=0.00533 d_far=0.00376 d_ring=0.00736 zero=0.0208 roll=0.00000 | total=5.8958
+  ...
+[bridge] gar=0.0836 base=0.0882 GAIN=+0.0046 wrong=0.0843 id_frac=+0.147 shuf=0.0000 zero=0.0882 | d_bg=0.00267 d_skin=0.00270 d_far=0.00254 d_ring=0.00896 zero=0.0254 roll=0.00000 | total=5.7349
+Epoch 130:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.0683 base=0.0685 GAIN=+0.0003 wrong=0.0682 id_frac=-0.009 shuf=0.0000 zero=0.0685 | d_bg=0.00128 d_skin=0.00264 d_far=0.00120 d_ring=0.00399 zero=0.0297 roll=0.00000 | total=5.6741
+[bridge] gar=0.0798 base=0.0798 GAIN=+0.0000 wrong=0.0798 id_frac=+0.000 shuf=0.0000 zero=0.0798 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=5.7295
+Epoch 134:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.1026 base=0.1142 GAIN=+0.0116 wrong=0.1027 id_frac=+0.005 shuf=0.0000 zero=0.1142 | d_bg=0.00493 d_skin=0.00606 d_far=0.00519 d_ring=0.01200 zero=0.0184 roll=0.00000 | total=5.8770
+[bridge] gar=0.1084 base=0.1284 GAIN=+0.0199 wrong=0.1084 id_frac=-0.004 shuf=0.0000 zero=0.1284 | d_bg=0.00766 d_skin=0.00875 d_far=0.00819 d_ring=0.01717 zero=0.0101 roll=0.00000 | total=5.9920
+
+Error step count: 0 | cond dropped: 1
+[DEPLOY]:
+NO FINAL CKPT -> in-loop trend is the evidence
+DONE Sat Jul 11 05:55:10 PM PDT 2026

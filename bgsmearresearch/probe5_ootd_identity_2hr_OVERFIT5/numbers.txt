@@ -1,0 +1,20 @@
+=== Run65 OOTD + STRONG IDENTITY (hard wrongs, W_SENS=40) (blocks 36,44,50,55, warped-mask gate, 20% dropout) 1hr OVERFIT5 ===
+RN=PROBE5_ootd_identity_2hr_0711_150419  started Sat Jul 11 03:04:23 PM PDT 2026
+
+--- in-loop [bridge] 4-way (PRIMARY GATE): gar / wrong / shuf / zero -- first / mid / last ---
+[bridge] hard-wrong pool cached: 256 colour vectors
+[bridge] gar=0.1239 base=0.1239 GAIN=+0.0000 wrong=0.1239 id_frac=+0.000 shuf=0.0000 zero=0.1239 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=5.2655
+  ...
+Epoch 62:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.0237 base=0.0237 GAIN=-0.0000 wrong=0.0237 id_frac=+0.000 shuf=0.0000 zero=0.0237 | d_bg=0.00027 d_skin=0.00046 d_far=0.00022 d_ring=0.00067 zero=0.0300 roll=0.00000 | total=5.0090
+  ...
+[bridge] gar=0.0630 base=0.0630 GAIN=+0.0000 wrong=0.0630 id_frac=+0.000 shuf=0.0000 zero=0.0630 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=5.1318
+Epoch 122:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.0817 base=0.0817 GAIN=+0.0000 wrong=0.0816 id_frac=+0.000 shuf=0.0000 zero=0.0817 | d_bg=0.00177 d_skin=0.00207 d_far=0.00180 d_ring=0.00330 zero=0.0300 roll=0.00000 | total=5.1945
+[bridge] gar=0.0912 base=0.0912 GAIN=+0.0000 wrong=0.0912 id_frac=+0.000 shuf=0.0000 zero=0.0912 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=5.2087
+Epoch 126:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.0775 base=0.0788 GAIN=+0.0014 wrong=0.0775 id_frac=+0.050 shuf=0.0000 zero=0.0788 | d_bg=0.00226 d_skin=0.00229 d_far=0.00214 d_ring=0.00709 zero=0.0286 roll=0.00000 | total=5.1742
+[bridge] gar=0.0840 base=0.0882 GAIN=+0.0042 wrong=0.0843 id_frac=+0.067 shuf=0.0000 zero=0.0882 | d_bg=0.00273 d_skin=0.00278 d_far=0.00255 d_ring=0.00917 zero=0.0258 roll=0.00000 | total=5.1794
+
+Error step count: 0 | cond dropped: 1
+[DEPLOY]:
+[DEPLOY] step=409 step=409 GARMENT dim=+1.66 L1=14.98 | SKIN dim=+2.48 L1=15.19 chroma=0.6(gt 0.6) | BG dim=-1.64 L1=5.83 | BAND_OFFSET=-1.89 (target -1)
+NO FINAL CKPT -> in-loop trend is the evidence
+DONE Sat Jul 11 04:19:33 PM PDT 2026

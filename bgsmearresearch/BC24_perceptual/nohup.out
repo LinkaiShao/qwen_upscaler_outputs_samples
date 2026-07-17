@@ -1,0 +1,4 @@
+WARM-START from SOAR (long-form setup probe): 
+[BC_MULTI] MULTI-GARMENT: OVERFIT_SIDS unset, training on full dataset
+RUN_NAME=BC24_perc_061921  LOG=bgsmearresearch/BC24_perceptual/BC24_perc_061921.log
+train.py exited rc=0 RUN_NAME=BC24_perc_061921

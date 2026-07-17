@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=RUN8_DETAILSLOT_ZI_0715_142303  LOG=bgsmearresearch/learned_detail_slot_zeroinit/RUN8_DETAILSLOT_ZI_0715_142303.log
+run_learned_detail_slot.sh: line 179: 1910867 Killed                  /home/link/venvs/ootd/bin/python -u train.py > "${LOG}" 2>&1

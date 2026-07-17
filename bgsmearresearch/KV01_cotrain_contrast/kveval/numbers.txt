@@ -1,0 +1,1 @@
+NO adapter ckpt runs/KV01_cotrain_114848/final/garment_adapter.pt

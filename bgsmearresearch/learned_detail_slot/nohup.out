@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=RUN4_DETAILSLOT_0715_070245  LOG=bgsmearresearch/learned_detail_slot/RUN4_DETAILSLOT_0715_070245.log
+train.py exited rc=0 RUN_NAME=RUN4_DETAILSLOT_0715_070245

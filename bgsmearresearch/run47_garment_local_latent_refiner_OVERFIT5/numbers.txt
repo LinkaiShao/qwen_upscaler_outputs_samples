@@ -1,0 +1,14 @@
+Garment-local latent refiner on frozen run37 — OVERFIT on the 5 reserved ids (NOT generalization)
+final = pred_latent + warped_mask * zero_init_refiner(pred, garment, mask);  outside garment: latent residual EXACTLY 0
+
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1
+run37 baseline      3.75  -3.70  -2.39  -2.77  -5.21  -6.04  21.51  0.832  15.21  11.54
+refiner (latent)    3.54  -3.15  -0.38  -1.19  -5.11  -6.04  25.95  0.931   3.14   9.99
+refiner (+pix mask) 3.59  -3.26  -0.45  -1.28  -5.13  -6.04  25.59  0.928   3.30  10.22
+
+VERDICT: every metric improves or holds; far_bg bit-identical (-6.04). Latent-space mask alone suffices
+(pixel composite unnecessary; VAE decode bleed is negligible: pixdiff_outside ~0.15-0.21/255).
+CAVEAT: 200k steps on 5 ids = MEMORIZATION of GT garment (garment latent-L1 0.129 -> 0.005).
+Proves the MECHANISM (garment improvable behind a hard spatial firewall, bg/skin safe), NOT generalization.
+NEXT: train on many ids, hold out these 5, measure how much of the garL1 gain survives.
+Refiner: 3.39M params, runs/garment_refiner_OVERFIT5/refiner.pt. Base preds: runs/BGBAND37_012549/deploy_imgs/*_pred_latent.pt

@@ -1,0 +1,9 @@
+=== MASKED TRAJECTORY BLEND — deploy on 5 reserved (5-ID overfit). run=MASKTRAJ_0714_1837 Tue Jul 14 08:08:51 PM PDT 2026 ===
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1
+run37 BASELINE      :      3.42    -3.73    -2.00     -2.52     -4.06   -4.40  21.62  0.836  15.09  10.97
+blend CORRECT       :      3.47    -4.09    -1.63     -2.39     -3.60   -3.60  21.68  0.839  14.91  10.53
+blend WRONG garment :      3.43    -4.02    -1.70     -2.42     -3.59   -3.60  21.69  0.839  14.96  10.50
+blend ZERO (den off):      3.51    -4.14    -1.69     -2.44     -3.63   -3.63  21.68  0.839  14.93  10.52
+WIN = garL1(correct) < garL1(baseline) [garment improved] AND < garL1(wrong) [garment-specific].
+By construction bg/skin (CLOUD/farbg/skinL1) MUST be ~identical across all rows; ZERO row MUST == BASELINE.
+panel ok

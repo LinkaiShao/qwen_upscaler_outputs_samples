@@ -1,0 +1,19 @@
+gate_logit=-0.1513 -> gate=0.46225  (init 0.5)
+out_proj absmean=8.861e-05  (0 at init)
+
+=== run51 — garment xattn @ proj_out (warmup=50, gate=0.5, real wrong-garment) ===
+5-id OVERFIT, LoRA+v6 FROZEN. Objective = garment L1 + edge + sensitivity + residual-outside.
+xattn OFF (== run37):      3.42    -3.74    -2.03     -2.55     -4.05   -4.40  21.61  0.836  15.11  10.96
+xattn ON            :      3.46    -4.10   -10.08     -8.23     -3.91   -4.09  20.87  0.833  19.88  10.89
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1
+DECIDE: garment improved? if NO -> proj_out branch too weak; abandon this injection location.
+
+--- bridge trace (last 6) ---
+[bridge] gar=0.0402 base=0.0402 GAIN=+0.0000 wrong=0.0403 | d_bg=0.00001 d_skin=0.00002 d_far=0.00000 d_ring=0.00002 | total=0.1657
+[bridge] gar=0.0630 base=0.0630 GAIN=+0.0000 wrong=0.0633 | d_bg=0.00004 d_skin=0.00007 d_far=0.00000 d_ring=0.00007 | total=0.2333
+[bridge] gar=0.0782 base=0.0782 GAIN=-0.0000 wrong=0.0797 | d_bg=0.00007 d_skin=0.00014 d_far=0.00000 d_ring=0.00011 | total=0.2696
+[bridge] gar=0.0688 base=0.0688 GAIN=+0.0000 wrong=0.0693 | d_bg=0.00000 d_skin=0.00001 d_far=0.00000 d_ring=0.00003 | total=0.2571
+[bridge] gar=0.1063 base=0.1064 GAIN=+0.0001 wrong=0.1102 | d_bg=0.00013 d_skin=0.00024 d_far=0.00000 d_ring=0.00021 | total=0.3341
+[bridge] gar=0.0686 base=0.0686 GAIN=-0.0000 wrong=0.0696 | d_bg=0.00007 d_skin=0.00013 d_far=0.00000 d_ring=0.00010 | total=0.2473
+panels -> bgsmearresearch/run51_garment_xattn_projout_fixed_OVERFIT5
+DONE

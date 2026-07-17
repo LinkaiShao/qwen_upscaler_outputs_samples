@@ -1,0 +1,6 @@
+
+### run44x_residchain_4late_b0.1 — 4late-site boundary0.1 (sites=44,50,55,59 boundary=0.1)
+chain-ON :      3.26    -3.50     3.20      1.15     -3.80   -4.10  21.68  0.832  15.23  10.55
+chain-OFF:      3.40    -3.70    -2.01     -2.52     -4.04   -4.39  21.61  0.836  15.13  10.98
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1 | ref run37: CLOUD 3.42 far -4.40 gar 15.03 skin 10.96
+RULE: PASS if garL1(ON)<garL1(OFF) AND CLOUD<=3.62 AND far_bg/skin not worse

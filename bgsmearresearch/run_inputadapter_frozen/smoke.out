@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=RUN1_SMOKE  LOG=bgsmearresearch/run_inputadapter_frozen/smoke.log
+run_inputadapter_frozen.sh: line 179: 1772557 Killed                  /home/link/venvs/ootd/bin/python -u train.py > "${LOG}" 2>&1

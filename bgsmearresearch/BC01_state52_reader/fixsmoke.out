@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=BC01_FIXSMOKE_000408  LOG=bgsmearresearch/BC01_state52_reader/BC01_FIXSMOKE_000408.log
+train.py exited rc=0 RUN_NAME=BC01_FIXSMOKE_000408

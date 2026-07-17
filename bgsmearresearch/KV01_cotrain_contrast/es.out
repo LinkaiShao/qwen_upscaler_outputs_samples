@@ -1,0 +1,3 @@
+[eval] START Thu Jul 16 01:58:32 PM PDT 2026  RUN_DIR=runs/KV01_cotrain_114848  MODE=state_enhancer  OUT=bgsmearresearch/KV01_cotrain_contrast/kveval
+[eval] adapter ckpt=runs/KV01_cotrain_114848/final/garment_adapter.pt  blocks=''
+NO adapter ckpt runs/KV01_cotrain_114848/final/garment_adapter.pt

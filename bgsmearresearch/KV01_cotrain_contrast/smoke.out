@@ -1,0 +1,4 @@
+WARM-START from SOAR (long-form setup probe): 
+[BC_MULTI] MULTI-GARMENT: OVERFIT_SIDS unset, training on full dataset
+RUN_NAME=KVSMOKE_114539  LOG=bgsmearresearch/KV01_cotrain_contrast/smoke.log
+run_branch_credit.sh: line 228: 2133693 Killed                  /home/link/venvs/ootd/bin/python -u train.py > "${LOG}" 2>&1

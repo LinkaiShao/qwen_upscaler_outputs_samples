@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=BC16_blk59_012220  LOG=bgsmearresearch/BC16_block59_wrapper/BC16_blk59_012220.log
+run_branch_credit.sh: line 224: 2034076 Killed                  /home/link/venvs/ootd/bin/python -u train.py > "${LOG}" 2>&1

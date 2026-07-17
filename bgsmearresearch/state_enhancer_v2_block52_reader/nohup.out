@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=RUNV2_ENH52_0715_213333  LOG=bgsmearresearch/state_enhancer_v2_block52_reader/RUNV2_ENH52_0715_213333.log
+train.py exited rc=0 RUN_NAME=RUNV2_ENH52_0715_213333

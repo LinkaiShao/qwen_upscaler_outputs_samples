@@ -1,0 +1,2 @@
+gate_logit: [-2.0304] -> gate: [0.116] (init 0.119)
+out_proj absmean: ['1.462e-05'] (0 at init)

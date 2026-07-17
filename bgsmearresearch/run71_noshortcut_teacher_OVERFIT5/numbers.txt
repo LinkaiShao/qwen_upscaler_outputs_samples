@@ -1,0 +1,19 @@
+=== run71_noshortcut_teacher_OVERFIT5 (run_run71.sh, arch=ootd) Sun Jul 12 06:27:37 PM PDT 2026 ===
+[smoke] errs=0 branch_alive=1 (log=logs/SMOKE_run71_noshortcut_teacher_OVERFIT5.log)
+1hr RUN_NAME=RUN_run71_noshortcut_teacher_OVERFIT5_183209
+
+--- in-loop tail (log) ---
+garment_ootd: branch — copied main-model block weights from indices [36, 44, 50, 55]
+garment_ootd: installed OOTDQwenAttnProcessor on main blocks [36, 44, 50, 55] (4 attn blocks)
+garment_ootd: branch_blocks 1,359,325,184 @ lr=3.0e-06; branch_aux 9,643,008 @ lr=3.0e-05; inj_kv 75,522,048 @ lr=3.0e-05; gates 4 @ lr=1.0e-03 (fp32, init=-2.0)
+[lora-unfreeze-after-sec] LoRA pre-frozen; will unfreeze at 1800s (v6 stays frozen)
+Epoch 89:   0%|          | 0/5 [00:00<?, ?it/s]Epoch 89:  20%|██        | 1/5 [00:04<00:16,  4.02s/it]Epoch 89:  40%|████      | 2/5 [00:08<00:12,  4.03s/it]Epoch 89:  60%|██████    | 3/5 [00:12<00:08,  4.03s/it][lora-unfreeze-after-sec] TIME trigger at 1802s -> unfreezing LoRA
+[DEPLOY] step=582 step=582 GARMENT dim=-0.09 L1=11.86 | SKIN dim=+1.36 L1=13.70 chroma=0.6(gt 0.6) | BG dim=-1.14 L1=4.74 | BAND_OFFSET=-1.39 (target -1)
+
+=== DEPLOY IDENTITY VERDICT (cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1) ===
+OFF (run37)     :      4.26    -4.02    -3.18     -3.39     -9.16  -12.12  22.00  0.842  14.28  11.71
+ON  (correct)   :      3.01    -3.24     4.51      2.16     -5.47   -6.90  21.94  0.844  14.03  10.71
+ON  (WRONG gar) :      3.01    -3.24     5.09      2.56     -5.46   -6.88  21.96  0.842  13.79  10.96
+identity-specific IFF garL1(correct) meaningfully < garL1(wrong); else GENERIC -> reject.
+panel ok
+DONE Sun Jul 12 07:55:36 PM PDT 2026

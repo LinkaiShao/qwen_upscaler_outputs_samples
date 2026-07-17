@@ -1,0 +1,10 @@
+=== EXP10: best warper -> run37 extra aligned-garment slot (WITH vs WITHOUT) ===
+[integrate] chosen best: exp3 dir=bgsmearresearch/warp_exp03_multilevel_OVERFIT5 identity_ok=True garL1=0.0043 mse=0.00003
+[integrate] wrote 5 aligned latents to /tmp/warp_aligned (from exp3)
+
+=== run37 deploy (cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1) ===
+WITHOUT aligned slot :      3.39    -3.68    -2.02     -2.52     -4.04   -4.39  21.62  0.836  15.08  10.97
+WITH    aligned slot :      3.40    -3.70    -2.08     -2.57     -4.04   -4.40  21.62  0.836  15.14  10.96
+aligned slot HELPS run37 IFF garL1(WITH) < garL1(WITHOUT).
+panel ok
+DONE Mon Jul 13 03:05:15 AM PDT 2026

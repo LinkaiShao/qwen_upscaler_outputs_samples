@@ -1,0 +1,6 @@
+[c2h] START COTRAIN_0714_1524 Tue Jul 14 03:24:56 PM PDT 2026
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=COTRAIN_0714_1524  LOG=logs/COTRAIN_0714_1524.log
+train.py exited rc=0 RUN_NAME=COTRAIN_0714_1524
+[c2h] train done rc=0 Tue Jul 14 05:26:17 PM PDT 2026
+[c2h] ALL DONE Tue Jul 14 05:49:02 PM PDT 2026

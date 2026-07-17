@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=RUN3_LATENTTOKEN_0715_043738  LOG=bgsmearresearch/latenttoken_adapter/RUN3_LATENTTOKEN_0715_043738.log
+train.py exited rc=0 RUN_NAME=RUN3_LATENTTOKEN_0715_043738

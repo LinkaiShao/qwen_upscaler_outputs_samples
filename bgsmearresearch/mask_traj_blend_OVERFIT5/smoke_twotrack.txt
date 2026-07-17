@@ -1,0 +1,3 @@
+=== TWO-TRACK SMOKE (2 ids): bg/skin OUTSIDE garment (CLOUD/farbg/skinL1) must be IDENTICAL ===
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1
+BASELINE : CORRECT  : (CLOUD/farbg/skinL1 identical -> quarantine works; garL1 may differ = garment changed)

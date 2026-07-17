@@ -1,0 +1,15 @@
+=== Probe4 target-space (warped_rgb in posed stream) 1hr OVERFIT5 ===
+RN=PROBE4_warpedrgb_1hr_0712_153607 started Sun Jul 12 03:55:41 PM PDT 2026
+
+--- in-loop [bridge] last 3 (gate dead for pose path; deploy test is verdict) ---
+[bridge] gar=0.0891 base=0.0891 GAIN=+0.0000 wrong=0.0891 id_frac=+0.000 shuf=0.0891 zero=0.0891 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.1150
+Epoch 74:   0%|          | 0/5 [00:00<?, ?it/s][bridge] gar=0.1312 base=0.1312 GAIN=-0.0000 wrong=0.1312 id_frac=+0.000 shuf=0.1312 zero=0.1312 | d_bg=0.00198 d_skin=0.00158 d_far=0.00223 d_ring=0.00137 zero=0.0300 roll=0.00000 | total=1.1961
+[bridge] gar=0.0954 base=0.0954 GAIN=+0.0000 wrong=0.0954 id_frac=+0.000 shuf=0.0954 zero=0.0954 | d_bg=0.00000 d_skin=0.00000 d_far=0.00000 d_ring=0.00000 zero=0.0300 roll=0.00000 | total=1.1333
+
+=== DEPLOY IDENTITY VERDICT (cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1) ===
+OFF (run37)     :      3.41    -3.73    -2.01     -2.52     -4.04   -4.38  21.61  0.836  15.09  10.98
+ON  (correct)   :      3.67    -3.66    -2.34     -2.72     -5.09   -5.89  21.51  0.831  15.27  11.54
+ON  (WRONG gar) :      2.83    -2.90    -1.34     -1.83     -3.37   -3.70  21.63  0.838  14.61  10.54
+identity-specific IFF garL1(correct) meaningfully < garL1(wrong); else GENERIC -> reject.
+panel ok
+DONE Sun Jul 12 05:03:53 PM PDT 2026

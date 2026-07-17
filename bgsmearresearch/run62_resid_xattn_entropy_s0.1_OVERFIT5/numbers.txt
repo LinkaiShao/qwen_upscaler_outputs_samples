@@ -1,0 +1,14 @@
+=== BGBAND62 : residual cross-attn + attention entropy (5-id OVERFIT, bridge on) ===
+[attn] sharp=0.506 cover=6.183 n=3
+Epoch 106:   0%|          | 0/5 [00:00<?, ?it/s][attn] sharp=0.570 cover=6.266 n=3
+[attn] sharp=0.517 cover=6.205 n=3
+[bridge] gar=0.0623 base=0.0623 GAIN=-0.0000 wrong=0.0623 | d_bg=0.00082 d_skin=0.00091 d_far=0.00087 d_ring=0.00080 zero=0.0300 roll=0.00000 | total=0.7082
+[bridge] gar=0.1092 base=0.1092 GAIN=+0.0000 wrong=0.1092 | d_bg=0.00228 d_skin=0.00186 d_far=0.00247 d_ring=0.00179 zero=0.0300 roll=0.00000 | total=0.8529
+[bridge] gar=0.0716 base=0.0716 GAIN=+0.0000 wrong=0.0716 | d_bg=0.00104 d_skin=0.00092 d_far=0.00112 d_ring=0.00089 zero=0.0300 roll=0.00000 | total=0.7786
+[bridge] gar=0.0888 base=0.0888 GAIN=+0.0000 wrong=0.0888 | d_bg=0.00159 d_skin=0.00127 d_far=0.00175 d_ring=0.00118 zero=0.0300 roll=0.00000 | total=0.8191
+
+branch OFF (== run37):      3.42    -3.74    -2.02     -2.53     -4.06   -4.40  21.62  0.836  15.10  10.96
+branch ON            :      5.05    -5.26    -2.15     -3.09     -5.99   -6.48  21.65  0.835  15.01  11.42
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1 | run37 ref garL1 15.11
+panels ok
+DONE

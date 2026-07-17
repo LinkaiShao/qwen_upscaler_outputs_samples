@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=RUN2_INPUTADAPTER_LORA_0715_015055  LOG=bgsmearresearch/inputadapter_lora/RUN2_INPUTADAPTER_LORA_0715_015055.log
+train.py exited rc=0 RUN_NAME=RUN2_INPUTADAPTER_LORA_0715_015055

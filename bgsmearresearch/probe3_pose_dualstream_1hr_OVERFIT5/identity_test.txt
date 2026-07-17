@@ -1,0 +1,12 @@
+=== IDENTITY TEST (trained run63 pose-residual ckpt) ===
+wrong-garment fed to gnet stream only; main model + posed context = correct
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1
+OFF (run37)     :      3.41    -3.72    -1.98     -2.50     -4.04   -4.39  21.62  0.836  15.09  10.96
+ON  (correct)   :      2.87    -3.19    -1.29     -1.88     -3.27   -3.48  21.65  0.837  14.75  10.59
+ON  (WRONG gar) :      2.86    -3.17    -1.28     -1.87     -3.27   -3.48  21.64  0.837  14.78  10.59
+
+VERDICT: identity-specific IFF garL1(correct) meaningfully < garL1(wrong).
+         if correct ~= wrong -> branch is GENERIC (ignores which garment).
+wrong pngs rendered: 5/5
+panel ok
+IDENTITY DONE Sun Jul 12 03:20:44 PM PDT 2026

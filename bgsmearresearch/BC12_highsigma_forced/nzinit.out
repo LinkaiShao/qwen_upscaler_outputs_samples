@@ -1,0 +1,3 @@
+WARM-START from SOAR (long-form setup probe): 
+RUN_NAME=BC12b_nzinit_001616  LOG=bgsmearresearch/BC12_highsigma_forced/BC12b_nzinit_001616.log
+run_branch_credit.sh: line 224: 2021660 Killed                  /home/link/venvs/ootd/bin/python -u train.py > "${LOG}" 2>&1

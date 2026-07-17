@@ -1,0 +1,2 @@
+=== Run67 PoseSeqGNet (garment as image tokens, identity binding) (blocks 36,44,50,55, zero-init gated) 1hr OVERFIT5 ===
+RN=PROBE7_poseseq_2hr_0711_192623  started Sat Jul 11 07:30:42 PM PDT 2026

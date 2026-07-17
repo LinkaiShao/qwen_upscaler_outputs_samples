@@ -1,0 +1,9 @@
+[integrate] wrote 5 aligned latents to /tmp/warp_aligned_full (from exp3 @ bgsmearresearch/warp_exp03_multilevel_FULLDATA_2h)
+
+=== EXP10 integration (FULL-DATA ckpt) — run37 WITH vs WITHOUT aligned garment slot ===
+NOTE: frozen run37 has NO trained consumer for the extra slot; a handoff gap is EXPECTED
+      and is a SEPARATE problem, not a warper failure.
+cols: CLOUD editbg editnb editall wholebg farbg PSNR SSIM garL1 skinL1
+WITHOUT aligned slot :      3.40    -3.71    -2.01     -2.52     -4.04   -4.39  21.62  0.836  15.11  10.97
+WITH    aligned slot :      3.41    -3.73    -1.97     -2.50     -4.05   -4.40  21.61  0.836  15.08  10.97
+aligned slot HELPS run37 IFF garL1(WITH) < garL1(WITHOUT).

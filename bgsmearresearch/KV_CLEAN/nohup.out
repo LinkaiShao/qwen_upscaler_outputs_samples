@@ -1,0 +1,2 @@
+RUN_NAME=KV_CLEAN_0716_155755  LOG=bgsmearresearch/KV_CLEAN/KV_CLEAN_0716_155755.log
+READ THE LOG: bc_on=gar(correct)  kvc_wrong=gar(wrong)  bc_off=gar(no-KV).  WANT bc_on < kvc_wrong (reads content) AND bc_on < bc_off (KV helps).
